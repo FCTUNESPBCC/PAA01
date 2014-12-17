@@ -5,3 +5,4 @@
 *.mf
 *.properties
 /PAA01/nbproject/private/
+.metadata/
