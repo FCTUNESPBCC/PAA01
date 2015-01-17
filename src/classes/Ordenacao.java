@@ -95,22 +95,185 @@ public class Ordenacao {
 		}
 	}
 	
-	public static void quickSortMedianaDeTres(long vetor[]){
-	}
+	public static void quickSortMedianaDeTres(long vetor[], int ini, int fim){
+	    
+	  if(ini<=fim){
+		//achando a mediana
+		long mediana =0;  
+	    int meio=(ini+fim)/2;
+	    int pos;
+	    int i=ini,j=fim;
+	    
+	    if(vetor[ini]<=vetor[fim]){
+	    	if(vetor[ini]>=vetor[meio]){
+	    		mediana =vetor[ini];
+	    		pos=ini;
+	    	}
+	    	else{
+	    		if(vetor[meio]<=vetor[fim]){
+	    			mediana =vetor[meio];
+		    		pos=meio;
+	    		}
+	    		else{
+	    			mediana =vetor[fim];
+		    		pos=fim;
+	    		}	    			
+	    	 }
+	    }
+	    else{
+	    	if(vetor[ini]<vetor[meio]){
+	    		mediana =vetor[ini];
+	    		pos=ini;
+	    	}
+	    	else{
+	    		if(vetor[meio]>vetor[fim]){
+	    			mediana =vetor[meio];
+		    		pos=meio;
+	    		}			
+	    	 }	
+	    }
+	   // FINAL DA PROCURA DA MEDIANA
+	   long aux; 
+	    while(i<=j){
+			while(vetor[i]<=mediana)i++;
+			while(vetor[j]>mediana)j--;
+			if(i<=j){
+				
+			 aux=vetor[i];
+			 vetor[i]=vetor[j];
+			 vetor[j]=aux;
+			 j--;
+			 i++;
+			}
+		}
+	   //chamadas recursivas 
+	   quickSortMedianaDeTres(vetor, ini, j);
+	   quickSortMedianaDeTres(vetor, i, fim);
+	    
+	  }
+		
+}
 	
 	public static void insertionSort(long vetor[]){
-	}
+			for(int i=1;i<vetor.length;i++){
+				long x=vetor[i];
+				for(int j=i-1;j>=0 && vetor[j]>x;j--){
+					vetor[i+1]=vetor[i];
+				}
+				vetor[i+1]=x;
+			}
+		}
+	
 	
 	public static void shellSort(long vetor[]){
 	}
 	
 	public static void seletionSort(long vetor[]){
+		long menor;
+		int posmenor;
+		for(int i=0;i<vetor.length;i++){
+			menor=vetor[i];
+			posmenor=i;
+			for(int j=i+1;j<vetor.length;j++){
+				if(vetor[j]<menor){
+					menor=vetor[j];
+					posmenor=j;
+				}
+			}
+			vetor[posmenor]=vetor[i];
+			vetor[i]=menor;
+		}
 	}
-	
+	//FUNCÕES PARA CONSTRUÇÃO DO HEAPSORT
 	public static void heapSort(long vetor[]){
+		constroiHeapMax(vetor);
+		int n=vetor.length;
+		
+		for(int i= vetor.length;i>0;i--){
+			//troca
+			long aux = vetor[i];
+			vetor[i]=vetor[0];
+			vetor[0]=aux;
+			maxHeapify(vetor,0,n--);
+		}
+		
 	}
 	
-	public static void mergeSort(long vetor[]){
+	public static void constroiHeapMax(long vetor[]){
+		for(int i = (vetor.length/2)-1;i>=0;i--){
+			maxHeapify(vetor,i , vetor.length);
+		}
+	}
+	
+	public static void maxHeapify(long vetor[],int  posi, int n){
+		int maxi;
+		int esq = 2*posi+1;
+		int direita = 2*posi+2;
+		
+		if((esq<n) && (vetor[esq]>vetor[posi])){
+			maxi = esq;
+		}
+		else maxi=posi;
+		
+		if((direita< n) && (vetor[direita]>vetor[maxi])){
+			maxi=direita;
+		}
+		if(maxi != posi){
+		  long aux;
+			//troca
+			  aux=vetor[posi];
+			  vetor[posi]=vetor[maxi];
+			  vetor[maxi]=aux;
+			  maxHeapify(vetor, maxi, n);
+		}
+
+	}
+	//
+	public static void mergeSort(long vetor[], int ini, int fim){
+		if(fim<=ini){
+			return;
+		}
+		
+		int meio=ini+fim/2;
+		
+		mergeSort(vetor,ini,meio);
+		mergeSort(vetor,meio+1,fim);
+		
+		long [] tempA = new long[meio-ini+1];
+		long [] tempB = new long[fim-meio];
+		
+		for(int i=0;i <= (meio - ini);i++){
+			tempA[i]=vetor[ini+i];
+		}
+		for(int i=0;i<=fim-meio-1;i++){
+			tempB[i]=vetor[meio+1+i];
+		}
+		
+		int i=0;
+		int j=0;
+		
+		for(int k=ini;k<=fim;k++){
+			if(i< tempA.length && j< tempB.length){
+				if(tempA[i]<tempB[j]){
+					vetor[k] = tempA[i++];
+				}
+				else{
+					vetor[k] = tempB[j++];
+				}
+			}
+			else { if(i<tempA.length){
+				    vetor[k] = tempA[i++];
+			       }
+			       else{ if(j<tempB.length){
+			    	   vetor[k] = tempB[j++];
+			       }
+			    	   
+			      }
+				      
+			}
+			
+		}
+		
 	}
 	
 }
