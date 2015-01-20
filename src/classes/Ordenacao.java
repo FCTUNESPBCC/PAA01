@@ -45,7 +45,7 @@ public class Ordenacao {
 		if(Ini<Fim){
 			pivo = vetor[Ini];
 			
-		  //Partição	
+		  //Partiï¿½ï¿½o	
 			while(i<=j){
 				while(vetor[i]<=pivo)i++;
 				while(vetor[j]>pivo)j--;
@@ -75,7 +75,7 @@ public class Ordenacao {
 		if(Ini<Fim){
 			pivo = vetor[Fim];
 			
-		  //Partição	
+		  //Partiï¿½ï¿½o	
 			while(i<=j){
 				while(vetor[i]<=pivo)i++;
 				while(vetor[j]>pivo)j--;
@@ -165,9 +165,21 @@ public class Ordenacao {
 		}
 	
 	
-	public static void shellSort(long vetor[]){
-	}
-	
+	public static void shellSort(long vetor[], int vetInc[], int n, int nInc) {
+            int inc, j, k, salto; 
+            long m;
+            for (inc = 0; inc < nInc; inc++) {
+                salto = vetInc[inc];
+                for (j = salto; j < n; j++) {
+                    m = vetor[j];
+                    for (k = j - salto; k >= 0 && vetor[k] > m; k -= salto)
+                        vetor[k + salto] = vetor[k];
+                    vetor[k + salto] = m;
+                }
+            }
+        }
+    
+    	
 	public static void seletionSort(long vetor[]){
 		long menor;
 		int posmenor;
@@ -184,7 +196,7 @@ public class Ordenacao {
 			vetor[i]=menor;
 		}
 	}
-	//FUNCÕES PARA CONSTRUÇÃO DO HEAPSORT
+	//FUNCï¿½ES PARA CONSTRUï¿½ï¿½O DO HEAPSORT
 	public static void heapSort(long vetor[]){
 		constroiHeapMax(vetor);
 		int n=vetor.length;
