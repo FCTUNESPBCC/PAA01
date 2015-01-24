@@ -165,7 +165,7 @@ public class Ordenacao {
 		}
 	
 	
-		public static void shellSort(long vetor[], int vetInc[], int n, int nInc) {
+		/*public static void shellSort(long vetor[], int vetInc[], int n, int nInc) {
             int inc, j, k, salto; 
             long m;
             for (inc = 0; inc < nInc; inc++) {
@@ -177,7 +177,29 @@ public class Ordenacao {
                     vetor[k + salto] = m;
                 }
             }
-        }
+        }*/
+		
+	public static void shellSort(long[] nums) {
+	    int h = 1;
+	    int n = nums.length;
+	    while(h < n)
+	            h = h * 3 + 1;
+	    h = h / 3;
+	    long c;
+	    int j;
+	    while (h > 0) {
+	        for (int i = h; i < n; i++) {
+	            c = nums[i];
+	            j = i;
+	            while (j >= h && nums[j - h] > c) {
+	                nums[j] = nums[j - h];
+	                j = j - h;
+	            }
+	            nums[j] = c;
+	        }
+	        h = h / 2;
+	    }
+	}
 	
 	public static void seletionSort(long vetor[]){
 		long menor;
@@ -210,13 +232,13 @@ public class Ordenacao {
 		
 	}
 	
-	public static void constroiHeapMax(long vetor[]){
+	private static void constroiHeapMax(long vetor[]){
 		for(int i = (vetor.length/2)-1;i>=0;i--){
 			maxHeapify(vetor,i , vetor.length);
 		}
 	}
 	
-	public static void maxHeapify(long vetor[],int  posi, int n){
+	private static void maxHeapify(long vetor[],int  posi, int n){
 		int maxi;
 		int esq = 2*posi+1;
 		int direita = 2*posi+2;
