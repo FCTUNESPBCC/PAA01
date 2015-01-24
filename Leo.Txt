@@ -1,0 +1,17 @@
+Estou verificando os algoritmos com 5000 elementos
+- Bubblesort
+	Não funcionando
+- Bubblesort sentinela
+	Não funcionando
+- Quicksorts
+	Voltaram a dar pal, pode alterar o algoritmo daquele jeito que ia fazer?
+- Insertionsort
+	Dando ArrayIndexOutOfBoundsException
+- ShellSort
+	OK!
+- SelectionSort
+	OK!
+- HeapSort
+	ArrayIndexOutOfBoundsException
+- MergeSort
+	StackOverflowError
