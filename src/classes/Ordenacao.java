@@ -171,14 +171,18 @@ public class Ordenacao {
 }
 	
 	public static void insertionSort(long vetor[]){
-			for(int i=1;i<vetor.length;i++){
-				long x=vetor[i];
-				for(int j=i-1;j>=0 && vetor[j]>x;j--){
-					vetor[i+1]=vetor[i];
-				}
-				vetor[i+1]=x;
-			}
-		}
+		 int j,i;
+		 long key;
+		   for(j = 1; j < vetor.length; j++){
+		      key = vetor[j];
+		      i = j - 1;
+		      while(i >= 0 && vetor[i] > key){
+		         vetor[i + 1] = vetor[i];
+		         i = i - 1;
+		      }
+		      vetor[i + 1] = key;
+		   }
+	}
 	
 	
 		/*public static void shellSort(long vetor[], int vetInc[], int n, int nInc) {
@@ -324,5 +328,13 @@ public class Ordenacao {
 		}
 		
 	}
-	
+	public static void verificaOrdenacao(long[] vetor){
+		for(int i = 0; i < vetor.length - 2; i++)
+			if(vetor[i] > vetor[i+1]){
+				System.out.println("Não Ordenado");
+				return;
+			}
+		System.out.println("Ordenado");
+	}
 }
+
