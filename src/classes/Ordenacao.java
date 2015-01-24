@@ -74,36 +74,38 @@ public class Ordenacao {
 	}
 	
 	public static void quickSortPivotamentoCentral(long vetor[], int Ini, int Fim){
-		int i=Ini;
-		int j=Fim-1;
-		int meio =(i+j)/2;
-		long pivo;
-		long aux;
-		
-		if(Ini<Fim){
-			pivo = vetor[meio];
-			
-		  //Partição	
-			while(i<=j){
-				if(vetor[i]<=pivo)i++;
-				else{
-				   if(vetor[j]>pivo)j--;
-				   else{
-				    if(i<j){
-				     aux=vetor[i];
-				     vetor[i]=vetor[j];
-				     vetor[j]=aux;
-				     j--;
-				     i++;
-				   }
-			      }	
-		       }
-			}	
-			vetor[meio] = vetor[j];
-		    vetor[j] = pivo;
-		    //chamada recursiva
-		    quickSortPivotamentoCentral(vetor,Ini,j-1);
-		    quickSortPivotamentoCentral(vetor,j+1,Fim);
+		int i, j;
+		long x, y;
+		i = Ini;
+		j = Fim;
+		x = vetor[(i+j) / 2];
+
+		while(i <= j)
+		{
+			while(vetor[i] < x && i < Fim)
+			{
+				i++;
+			}
+			while(vetor[j] > x && j > Ini)
+			{
+				j--;
+			}
+			if(i <= j)
+			{
+				y = vetor[i];
+				vetor[i] = vetor[j];
+				vetor[j] = y;
+				i++;
+				j--;
+			}
+		}
+		if(j > Ini)
+		{
+			quickSortPivotamentoCentral(vetor, Ini, j);
+		}
+		if(i < Fim)
+		{
+			quickSortPivotamentoCentral(vetor, i, Fim);
 		}
 	}
 	
