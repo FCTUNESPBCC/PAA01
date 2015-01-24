@@ -12,28 +12,32 @@ package classes;
 public class Ordenacao {
     
 	public static void bubbleSort(long vetor[]) {
-		for(int i=0;i<vetor.length-1;i++)
-			for(int j=0;j<vetor.length-i-1;j++)
-				if(vetor[j]>vetor[j+i]){
-					long aux=vetor[j];
-					vetor[j]=vetor[j+1];
-					vetor[j+1]=aux;
-				}
+        long aux;
+        for(int j = 0; j < vetor.length - 1; j++) {
+            for (int i = 0; i < vetor.length - 1 - j; i++) {
+                if (vetor[i] > vetor[i + 1]) {
+                    aux = vetor[i];
+                    vetor[i] = vetor[i + 1];
+                    vetor[i + 1] = aux;
+                }
+            }
+        }
 	}
 	
 	public static void bubbleSortSentinela(long vetor[]) {
-		boolean sentinela=true;
-		
-	 for(int i=0;(i<vetor.length-1) && (sentinela);i++){ 
-	    sentinela = false;
-		for(int j=0;j<vetor.length-i-1;j++)
-			if(vetor[j]>vetor[j+i]){
-				long aux=vetor[j];
-				vetor[j]=vetor[j+1];
-				vetor[j+1]=aux;
-				sentinela = true;
-			}
-	  }	
+		boolean troca = true;
+        long aux;
+        while (troca) {
+            troca = false;
+            for (int i = 0; i < vetor.length - 1; i++) {
+                if (vetor[i] > vetor[i + 1]) {
+                    aux = vetor[i];
+                    vetor[i] = vetor[i + 1];
+                    vetor[i + 1] = aux;
+                    troca = true;
+                }
+            }
+        }	
 	}
 	
 	public static void quickSortPivotamentoInicial(long vetor[], int Ini, int Fim){
