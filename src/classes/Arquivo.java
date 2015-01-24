@@ -46,7 +46,7 @@ public class Arquivo {
 	}
 	
 	public static void escreve(String text) throws IOException{
-		buffWrite.write(text);
+		buffWrite.write(text+"\n");
 	}
 	
 	public static String readLine() throws IOException{
