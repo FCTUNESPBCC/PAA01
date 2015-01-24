@@ -285,11 +285,12 @@ public class Ordenacao {
 	}
 	//
 	public static void mergeSort(long vetor[], int ini, int fim){
+		System.out.println(ini+","+fim);
 		if(fim<=ini){
 			return;
 		}
 		
-		int meio=ini+fim/2;
+		int meio=(ini+fim)/2;
 		
 		mergeSort(vetor,ini,meio);
 		mergeSort(vetor,meio+1,fim);
