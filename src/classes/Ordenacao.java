@@ -51,16 +51,19 @@ public class Ordenacao {
 			
 		  //Partição	
 			while(i<=j){
-				while(vetor[i]<=pivo)i++;
-				while(vetor[j]>pivo)j--;
-				if(i<j){
-				 aux=vetor[i];
-				 vetor[i]=vetor[j];
-				 vetor[j]=aux;
-				 j--;
-				 i++;
+				if(vetor[i]<=pivo)i++;
+				else{
+				 if(vetor[j]>pivo)j--;
+				 else
+				   if(i<j){
+				   aux=vetor[i];
+				   vetor[i]=vetor[j];
+				   vetor[j]=aux;
+				   j--;
+				   i++;
 				}
 			}
+		  }	
 			vetor[Ini] = vetor[j];
 		    vetor[j] = pivo;
 		    //chamada recursiva
@@ -73,25 +76,30 @@ public class Ordenacao {
 	public static void quickSortPivotamentoCentral(long vetor[], int Ini, int Fim){
 		int i=Ini;
 		int j=Fim-1;
+		int meio =(i+j)/2;
 		long pivo;
 		long aux;
 		
 		if(Ini<Fim){
-			pivo = vetor[Fim];
+			pivo = vetor[meio];
 			
 		  //Partição	
 			while(i<=j){
-				while(vetor[i]<=pivo)i++;
-				while(vetor[j]>pivo)j--;
-				if(i<=j){
-				 aux=vetor[i];
-				 vetor[i]=vetor[j];
-				 vetor[j]=aux;
-				 j--;
-				 i++;
-				}
+				if(vetor[i]<=pivo)i++;
+				else{
+				   if(vetor[j]>pivo)j--;
+				   else{
+				    if(i<j){
+				     aux=vetor[i];
+				     vetor[i]=vetor[j];
+				     vetor[j]=aux;
+				     j--;
+				     i++;
+				   }
+			      }	
+		       }
 			}	
-			vetor[Fim] = vetor[j];
+			vetor[meio] = vetor[j];
 		    vetor[j] = pivo;
 		    //chamada recursiva
 		    quickSortPivotamentoCentral(vetor,Ini,j-1);
@@ -138,18 +146,22 @@ public class Ordenacao {
 	    }
 	   // FINAL DA PROCURA DA MEDIANA
 	   long aux; 
-	    while(i<=j){
-			while(vetor[i]<=mediana)i++;
-			while(vetor[j]>mediana)j--;
-			if(i<=j){
-				
-			 aux=vetor[i];
-			 vetor[i]=vetor[j];
-			 vetor[j]=aux;
-			 j--;
-			 i++;
-			}
-		}
+	   while(i<=j){
+			if(vetor[i]<=mediana)i++;
+			else{
+			   if(vetor[j]>mediana)j--;
+			   else{
+			    if(i<j){
+			     aux=vetor[i];
+			     vetor[i]=vetor[j];
+			     vetor[j]=aux;
+			     j--;
+			     i++;
+			   }
+		      }	
+	       }
+		}	
+		
 	   //chamadas recursivas 
 	   quickSortMedianaDeTres(vetor, ini, j);
 	   quickSortMedianaDeTres(vetor, i, fim);
