@@ -110,53 +110,57 @@ public class Ordenacao {
 	}
 	
 	public static void quickSortMedianaDeTres(long vetor[], int ini, int fim){
-	   System.out.println(ini+","+fim);
 	  if(ini<=fim){
 		//achando a mediana
 		long mediana = 0;  
 	    int meio=(ini+fim)/2;
-	    int pos;
 	    int i=ini,j=fim;
-	    
-	    if(vetor[ini]<=vetor[fim]){
-	    	if(vetor[ini]>=vetor[meio]){
-	    		mediana =vetor[ini];
-	    		pos=ini;
-	    	}
-	    	else{
-	    		if(vetor[meio]<=vetor[fim]){
-	    			mediana =vetor[meio];
-		    		pos=meio;
+	    long aux[] = new long[3];
+	    if(vetor[ini] >= vetor[meio]){
+	    	if(vetor[ini] >= vetor[fim]){
+	    		aux[2] = vetor[ini];
+	    		if(vetor[meio]>vetor[fim]){
+	    			aux[1] = vetor[meio]; aux[0] = vetor[fim];
 	    		}
 	    		else{
-	    			mediana =vetor[fim];
-		    		pos=fim;
-	    		}	    			
-	    	 }
-	    }
-	    else{
-	    	if(vetor[ini]<vetor[meio]){
-	    		mediana =vetor[ini];
-	    		pos=ini;
+	    			aux[1] = vetor[fim]; aux[0] = vetor[meio];
+	    		}
 	    	}
 	    	else{
-	    		if(vetor[meio]>vetor[fim]){
-	    			mediana =vetor[meio];
-		    		pos=meio;
-	    		}			
-	    	 }	
+	    		aux[2] = vetor[fim];
+	    		aux[1] = vetor[ini];
+	    		aux[0] = vetor[meio];
+	    	}
 	    }
+	    else{
+	    	if(vetor[meio] >= vetor[fim]){
+	    		aux[2] = vetor[meio];
+	    		if(vetor[ini]>vetor[fim]){
+	    			aux[1] = vetor[ini]; aux[0] = vetor[fim];
+	    		}
+	    		else{
+	    			aux[1] = vetor[fim]; aux[0] = vetor[ini];
+	    		}
+	    	}
+	    	else{
+	    		aux[2] = vetor[fim];
+	    		aux[1] = vetor[meio];
+	    		aux[0] = vetor[ini];
+	    	}
+	    }
+	    mediana = aux[1];
+	    
 	   // FINAL DA PROCURA DA MEDIANA
-	   long aux; 
+	   long auxi; 
 	   while(i<=j){
-			if(vetor[i]<=mediana)i++;
+			if(vetor[i]<mediana)i++;
 			else{
 			   if(vetor[j]>mediana)j--;
 			   else{
-			    if(i<j){
-			     aux=vetor[i];
+			    if(i<=j){
+			     auxi=vetor[i];
 			     vetor[i]=vetor[j];
-			     vetor[j]=aux;
+			     vetor[j]=auxi;
 			     j--;
 			     i++;
 			   }
@@ -165,8 +169,10 @@ public class Ordenacao {
 		}	
 		
 	   //chamadas recursivas 
-	   quickSortMedianaDeTres(vetor, ini, j);
-	   quickSortMedianaDeTres(vetor, i, fim);
+	   if(j > ini);
+	   	quickSortMedianaDeTres(vetor, ini, j);
+	   if(i > fim);
+	   	quickSortMedianaDeTres(vetor, i, fim);
 	  }
 		
 }
@@ -184,21 +190,6 @@ public class Ordenacao {
 		      vetor[i + 1] = key;
 		   }
 	}
-	
-	
-		/*public static void shellSort(long vetor[], int vetInc[], int n, int nInc) {
-            int inc, j, k, salto; 
-            long m;
-            for (inc = 0; inc < nInc; inc++) {
-                salto = vetInc[inc];
-                for (j = salto; j < n; j++) {
-                    m = vetor[j];
-                    for (k = j - salto; k >= 0 && vetor[k] > m; k -= salto)
-                        vetor[k + salto] = vetor[k];
-                    vetor[k + salto] = m;
-                }
-            }
-        }*/
 		
 	public static void shellSort(long[] nums) {
 	    int h = 1;
