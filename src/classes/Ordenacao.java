@@ -110,7 +110,7 @@ public class Ordenacao {
 	}
 	
 	public static void quickSortMedianaDeTres(long vetor[], int ini, int fim){
-	    
+	   System.out.println(ini+","+fim);
 	  if(ini<=fim){
 		//achando a mediana
 		long mediana = 0;  
@@ -167,7 +167,6 @@ public class Ordenacao {
 	   //chamadas recursivas 
 	   quickSortMedianaDeTres(vetor, ini, j);
 	   quickSortMedianaDeTres(vetor, i, fim);
-	    
 	  }
 		
 }
@@ -242,9 +241,9 @@ public class Ordenacao {
 	//FUNCÕES PARA CONSTRUÇÃO DO HEAPSORT
 	public static void heapSort(long vetor[]){
 		constroiHeapMax(vetor);
-		int n=vetor.length;
+		int n = vetor.length - 1;
 		
-		for(int i= vetor.length;i>0;i--){
+		for(int i = vetor.length - 1;i>0;i--){
 			//troca
 			long aux = vetor[i];
 			vetor[i]=vetor[0];
