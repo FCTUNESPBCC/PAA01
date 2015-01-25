@@ -13,7 +13,7 @@ public class Main {
 	
 	public static void main(String args[]) throws IOException{
 		int N[] = new int[13];
-		int REPETICOES = 10;
+		int REPETICOES = 50;
 		N[0] = 50;
 		N[1] = 100;
 		N[2] = 500;
@@ -38,21 +38,39 @@ public class Main {
 			Arquivo.setArquivo(casos[k]);
 			for(int i = 0; i < 13; i++){
 				long[] vet = new long[N[i]];
+				Arquivo.abreArquivoLeitura();
+				Arquivo.getElements(vet,N[i]);
+				Arquivo.fechaArquivoLeitura();
+				long start = System.currentTimeMillis();
 				for(int j = 0; j < REPETICOES; j++){
-					Arquivo.abreArquivoLeitura();
-					Arquivo.getElements(vet,N[i]);
-					Arquivo.fechaArquivoLeitura();
-					long start = System.currentTimeMillis();
-					Ordenacao.quickSortMedianaDeTres(vet,0,vet.length-1); //LINHA A SER ALTERADA 
-					long finish = System.currentTimeMillis();
-					tempo[k*13 + i] += ((finish - start)); 
+					long[] temp = vet.clone();
+					//Ordenacao.seletionSort(temp);
+					//Ordenacao.bubbleSort(vet);
+					//Ordenacao.bubbleSortSentinela(temp);
+
+					
+					
+					
+					//Ordenacao.insertionSort(temp);
+					
+					Ordenacao.quickSortPivotamentoInicial(vet, 0, vet.length-1);
+					//Ordenacao.quickSortPivotamentoCentral(temp, 0, vet.length - 1);
+					//Ordenacao.quickSortMedianaDeTres(temp, 0, vet.length - 1);
+					//Ordenacao.heapSort(temp);
+					//Ordenacao.mergeSort(temp, 0, temp.length - 1);
+					//Ordenacao.shellSort(temp);
+					
+					
 				}
+				long finish = System.currentTimeMillis();
+				tempo[k*13 + i] = ((finish - start)); 
+				System.out.println(N[i]+":"+((finish - start)));
 			}
 		}
-		String arquivo = "quickSortMedianaDeTres.csv"; //LINHA A SER ALTERADA 
+		String arquivo = "Quick Sort Pivotamento Inicial.csv"; //LINHA A SER ALTERADA 
 		Arquivo.setArquivo(arquivo);
 		Arquivo.abreArquivoEscrita();
-		Arquivo.escreve("QuickSort Mediana de Três;"); //LINHA A SER ALTERADA 
+		Arquivo.escreve("Quick Sort Pivotamento Inicial;"); //LINHA A SER ALTERADA 
 		Arquivo.escreve("Melhor Caso;");
 		int i = 0, j = 0;
 		for(; i < 13; i++){
